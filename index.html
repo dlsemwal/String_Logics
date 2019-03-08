@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <style>
+        .btn {
+            border-radius: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="bg-info py-5">
+        <div class="container overflow-hidden">
+            <h1>JS Assignment-1</h1>
+            <p id="sample1">
+                lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem obcaecati inventore doloribus
+                perspiciatis earum illum, vel error maxime asperiores temporibus laudantium nostrum, velit voluptatem,
+                corrupti a ea facilis animi labore?
+            </p>
+            <button class="btn btn-success float-left mx-2" type="button" onclick="caps()">Capitalize first
+                letter</button>
+            <button class="btn btn-success float-left mx-2" type="button" onclick="capsAll()">Capitalize first
+                letter</button>
+            <div class="float-left">
+                <div class="input-group mx-2">
+                    <input type="text" class="form-control">
+                    <button type="button" class="btn btn-success" onclick="findWord()">Check Word</button>
+                    <button type="button" class="btn btn-success" onclick="findOccurence()">Find No. of
+                        Occurence</button>
+                    <button type="button" class="btn btn-success" onclick="density()">Word density</button>
+                    <button type="button" class="btn btn-success" onclick="getExt()">Get Extension</button>
+                </div>
+                <p id="response"></p>
+            </div>
+
+        </div>
+
+        <script>
+            function caps() {
+                var sample = document.getElementById("sample1").innerText
+                var firstLetter = sample.charAt(0).toUpperCase()
+                document.getElementById("sample1").innerHTML = sample.replace(sample.charAt(0), firstLetter)
+            }
+            function capsAll() {
+                var sample = document.getElementById("sample1").innerText
+                sample = sample.split(" ")
+
+                var text = ""
+                for (n in sample) {
+                    var word = sample[n]
+
+                    word = word.replace(word[0], word[0].toUpperCase())
+
+                    text += word + " ";
+                }
+                document.getElementById("sample1").innerHTML = text;
+            }
+            function findWord() {
+                var str = document.getElementsByClassName("form-control")[0].value
+                var sample = document.getElementById("sample1").innerHTML
+                document.getElementById("response").innerHTML = sample.search(str) >= 0
+
+            }
+            function findOccurence() {
+                var str = document.getElementsByClassName("form-control")[0].value
+                var sample = document.getElementById("sample1").innerText
+                var sampleArray = [];
+                document.getElementById("response").innerHTML = sampleArray.length
+                var n = 0;
+                while (n < 272) {
+                    n = sample.indexOf(str, n)
+                    if (n < 0) {
+                        break;
+                    }
+                    sampleArray.push(str)
+                    n = n + str.length
+                }
+                document.getElementById("response").innerHTML = sampleArray.length
+                return sampleArray.length / sample.length
+            }
+            function density() {
+                document.getElementById("response").innerHTML = findOccurence() * 100 + "%"
+            }
+            function getExt() {
+                var str = document.getElementsByClassName("form-control")[0].value
+                var indexOfExt = str.lastIndexOf(".")
+                document.getElementById("response").innerHTML = (indexOfExt < 0) ? null : str.slice(indexOfExt)
+            }
+        </script>
+    </section>
+
+
+</body>
+
+</html>
